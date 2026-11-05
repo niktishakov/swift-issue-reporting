@@ -1,4 +1,6 @@
-import Foundation
+#if canImport(Darwin) || os(WASI)
+  import Foundation
+#endif
 
 extension String? {
   @usableFromInline
@@ -15,7 +17,7 @@ extension String? {
 extension String {
   @usableFromInline
   func withAppHostWarningIfNeeded() -> String {
-    #if os(WASI)
+    #if !canImport(Darwin)
       return self
     #else
       guard
@@ -52,7 +54,7 @@ extension String {
     #endif
   }
 
-  #if !os(WASI)
+  #if canImport(Darwin)
     @usableFromInline
     var isTestFrame: Bool {
       guard let xcTestCase = NSClassFromString("XCTestCase")

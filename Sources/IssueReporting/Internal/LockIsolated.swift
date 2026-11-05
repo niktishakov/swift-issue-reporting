@@ -1,9 +1,11 @@
-import Foundation
+#if canImport(Darwin) || os(WASI)
+  import Foundation
+#endif
 
 @usableFromInline
 final class LockIsolated<Value>: @unchecked Sendable {
   private var _value: Value
-  private let lock = NSLock()
+  private let lock = Lock()
   @usableFromInline
   init(_ value: sending Value) {
     self._value = value

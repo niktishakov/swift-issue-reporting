@@ -1,4 +1,6 @@
-public import Foundation
+#if canImport(Darwin) || os(WASI)
+  public import Foundation
+#endif
 
 #if canImport(os)
   public import os

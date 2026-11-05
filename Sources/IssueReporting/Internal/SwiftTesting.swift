@@ -1,6 +1,11 @@
-import Foundation
-
-#if canImport(Android)
+#if canImport(Darwin) || os(WASI)
+  import Foundation
+#endif
+#if canImport(Glibc)
+  import Glibc
+#elseif canImport(Musl)
+  import Musl
+#elseif canImport(Android)
   import Android
 #endif
 

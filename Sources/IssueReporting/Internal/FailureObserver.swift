@@ -1,10 +1,12 @@
-import Foundation
+#if canImport(Darwin) || os(WASI)
+  import Foundation
+#endif
 
 @usableFromInline
 final class FailureObserver: @unchecked Sendable {
   @TaskLocal public static var current: FailureObserver?
 
-  private let lock = NSRecursiveLock()
+  private let lock = RecursiveLock()
   private var count = 0
 
   @usableFromInline

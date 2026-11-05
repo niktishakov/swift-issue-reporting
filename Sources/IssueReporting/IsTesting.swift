@@ -1,7 +1,11 @@
 #if os(WASI)
   public let isTesting = false
 #else
-  import Foundation
+  #if canImport(Darwin)
+    import Foundation
+  #else
+    import FoundationEssentials
+  #endif
 
   /// Whether or not the current process is running tests.
   ///
